@@ -1,4 +1,3 @@
-
 package ru.iu3.fclient;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +10,12 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 
+interface TransactionEvents {
+    String enterPin(int ptc, String amount);
+    void transactionResult(boolean result);
+}
 public class PinpadActivity extends AppCompatActivity {
+
 
     TextView tvPin;
     String pin = "";
@@ -23,8 +27,6 @@ public class PinpadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pinpad);
 
         tvPin = findViewById(R.id.txtPin);
-
-        ShuffleKeys();
 
         TextView ta = findViewById(R.id.txtAmount);
         String amt = String.valueOf(getIntent().getStringExtra("amount"));
@@ -41,6 +43,9 @@ public class PinpadActivity extends AppCompatActivity {
             tp.setText("Осталась одна попытка");
 
 
+
+        ShuffleKeys();
+
         findViewById(R.id.btnOK).setOnClickListener((View) -> {
             Intent it = new Intent();
             it.putExtra("pin", pin);
@@ -49,12 +54,12 @@ public class PinpadActivity extends AppCompatActivity {
         });
 
 
-
         findViewById(R.id.btnReset).setOnClickListener((View) -> {
             pin = "";
             tvPin.setText("");
         });
     }
+
 
     public void keyClick(View v)
     {
@@ -66,6 +71,7 @@ public class PinpadActivity extends AppCompatActivity {
             tvPin.setText("****".substring(3 - sz));
         }
     }
+
 
     protected void ShuffleKeys()
     {
@@ -91,4 +97,6 @@ public class PinpadActivity extends AppCompatActivity {
             keys[i].setText(txt);
         }
     }
+
+
 }
