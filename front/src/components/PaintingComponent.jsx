@@ -35,9 +35,6 @@ const PaintingComponent = props => {
     }, []);
 
     const changeArtist = (e) => {
-        setArtistid({name: e.target.value});
-        console.log(e.target.value);
-    }
 
     const changeMuseum = (e) => {
         setMuseumid({name: e.target.value});
@@ -48,8 +45,8 @@ const PaintingComponent = props => {
         event.preventDefault();
         event.stopPropagation();
         let err = null;
-        if (!name) err = "Название картины должно быть указано";
-        if (!year) err = "Года создания должен быть указан";
+        if (!name) err = "Картина должна быть указана";
+        if (!year) err = "Год создания должен быть указан";
         if (err) props.dispatch(alertActions.error(err));
         let painting = {id, name, artistid, museumid, year};
 
